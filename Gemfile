@@ -78,4 +78,7 @@ end
 
 gem "devise"
 
+gem "faker"
+
 gem "pundit"
+
