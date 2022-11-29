@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   # before_action:
 
   def index
+    @items = Item.all
   end
 
   def show
@@ -23,5 +24,4 @@ class ItemsController < ApplicationController
   end
 
   # private
-
 end
