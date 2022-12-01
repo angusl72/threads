@@ -1,0 +1,15 @@
+<div class="container d-flex flex-wrap">
+  <% @items.each do |item| %>
+
+    <div class="card m-2 text-center" style="width: 18rem;">
+      <img src="https://www.legacy.com.au/wp-content/uploads/2020/10/tshirt-2.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to item.name, item_path(item) %></h5>
+        <p class="card-text"><%= item.description %></p>
+        <p class="card-text"><strong><%= item.category %></strong></p>
+        <%= link_to "$#{item.price}0", item_path(item), :class => "btn btn-primary m-1"%>
+      </div>
+    </div>
+
+  <% end %>
+</div>
