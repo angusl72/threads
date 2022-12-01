@@ -10,7 +10,7 @@ class SellerReviewsController < ApplicationController
     @seller_review = SellerReview.new(seller_review_params)
     @seller_review.booking = @booking
     if @seller_review.save!
-      redirect_to root_path, status: :see_other
+      redirect_to item_path(@booking.item), status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class SellerReviewsController < ApplicationController
   def update
     @seller_review.update(seller_review_params)
     if @seller_review.save!
-      redirect_to root_path, status: :see_other
+      redirect_to item_path(@booking.item), status: :see_other
     else
       render :new, status: :unprocessable_entity
     end
