@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  # before_action:
+  before_action :set_item, only: %i[show edit update destroy]
 
   def index
     @items = policy_scope(Item)
@@ -41,6 +41,10 @@ class ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:name, :type, :description, :price, :size)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
 end
