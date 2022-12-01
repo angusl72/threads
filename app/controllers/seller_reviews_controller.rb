@@ -22,12 +22,15 @@ class SellerReviewsController < ApplicationController
 
   def update
     @seller_review.update(seller_review_params)
-    #need to add redirection to item page
+    if @seller_review.save!
+      redirect_to root_path, status: :see_other
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def destroy
     @seller_review.destroy
-    #need to add redirection to item page
   end
 
   private
@@ -41,7 +44,7 @@ class SellerReviewsController < ApplicationController
   end
 
   def seller_review_params
-    params.require(:seller_review).permit(:rating, :feedback, :booking_id)
+    params.require(:seller_review).permit(:rating, :feedback, :booking_id, :id)
   end
 
 end
