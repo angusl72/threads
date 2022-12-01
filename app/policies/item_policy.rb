@@ -10,8 +10,12 @@ class ItemPolicy < ApplicationPolicy
     true
   end
 
-  def create?
+  def new?
     true
+  end
+
+  def create?
+    new?
   end
 
   def update?
