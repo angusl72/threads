@@ -26,5 +26,5 @@ class ItemReviewsController < ApplicationController
   end
 
   def item_review_params
-    params.require(:review).permit(:rating, :feedback)
+    params.require(:item_review).permit(:rating, :feedback, :booking_id)
 end
