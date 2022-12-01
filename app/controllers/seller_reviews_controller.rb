@@ -4,11 +4,14 @@ class SellerReviewsController < ApplicationController
 
   def new
     @seller_review = SellerReview.new
+    authorize @seller_review
   end
 
   def create
     @seller_review = SellerReview.new(seller_review_params)
     @seller_review.booking = @booking
+    authorize @seller_review
+
     if @seller_review.save!
       redirect_to item_path(@booking.item), status: :see_other
     else
@@ -17,10 +20,11 @@ class SellerReviewsController < ApplicationController
   end
 
   def edit
-
+    authorize @seller_review
   end
 
   def update
+    authorize @seller_review
     @seller_review.update(seller_review_params)
     if @seller_review.save!
       redirect_to item_path(@booking.item), status: :see_other
@@ -30,6 +34,7 @@ class SellerReviewsController < ApplicationController
   end
 
   def destroy
+    authorize @seller_review
     @seller_review.destroy
   end
 
