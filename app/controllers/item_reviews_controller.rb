@@ -3,11 +3,14 @@ class ItemReviewsController < ApplicationController
 
   def new
     @item_review = ItemReview.new
+    authorize @item_review
   end
 
   def create
     @item_review = ItemReview.new(item_review_params)
     @item_review.booking = @booking
+    authorize @item_review
+
     if @item_review.save
       redirect_to booking_path(@booking)
     else
@@ -16,9 +19,12 @@ class ItemReviewsController < ApplicationController
   end
 
   def destroy
+    authorize @item_review
     @item_review = ItemReview.find(params[:id])
     @item_review.destroy
     redirect_to booking_path(@item_review.booking), status: :see_other
+  end
+
   private
 
   def set_booking
@@ -27,4 +33,5 @@ class ItemReviewsController < ApplicationController
 
   def item_review_params
     params.require(:review).permit(:rating, :feedback)
+  end
 end
