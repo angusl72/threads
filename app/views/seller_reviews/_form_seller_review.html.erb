@@ -1,0 +1,7 @@
+<div class="container">
+  <%= simple_form_for([@booking, @seller_review]) do |f| %>
+    <%= f.input :rating %>
+    <%= f.input :feedback %>
+    <%= f.submit %>
+  <% end %>
+</div>

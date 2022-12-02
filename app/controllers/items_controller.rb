@@ -16,9 +16,16 @@ class ItemsController < ApplicationController
   end
 
   def create
-    authorize @item
     @item = Item.new(item_params)
     @item.user = current_user
+
+    authorize @item
+
+    if @item.save
+      redirect_to @item, notice: 'item created'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -33,6 +40,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    authorize @item
     @item = Item.find(params[:id])
     @item.destroy
     redirect_to items_path, status: :see_other
@@ -41,7 +49,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :type, :description, :price, :size)
+    params.require(:item).permit(:name, :type, :category, :description, :price, :size)
   end
 
   def set_item
