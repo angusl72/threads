@@ -39,6 +39,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+    authorize @item
     @item = Item.find(params[:id])
     @item.destroy
     redirect_to items_path, status: :see_other

@@ -2,10 +2,12 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: %i[show]
 
   def index
+    @bookings = policy_scope(Booking)
     @bookings = Booking.all
   end
 
   def show
+    authorize @restaurant
   end
 
   def update_status
@@ -18,10 +20,12 @@ class BookingsController < ApplicationController
 
   def new
     @booking = Booking.new
+    authorize @booking
   end
 
   def create
     @booking = Booking.new(booking_params)
+    authorize @booking
 
       if @booking.save
         redirect_to @booking, notice: "Booking was successfully created."
