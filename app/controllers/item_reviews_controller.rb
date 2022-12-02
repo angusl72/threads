@@ -19,6 +19,7 @@ class ItemReviewsController < ApplicationController
     @item_review = ItemReview.find(params[:id])
     @item_review.destroy
     redirect_to booking_path(@item_review.booking), status: :see_other
+  end
   private
 
   def set_booking
@@ -27,4 +28,5 @@ class ItemReviewsController < ApplicationController
 
   def item_review_params
     params.require(:review).permit(:rating, :feedback)
+  end
 end

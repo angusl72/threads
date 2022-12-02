@@ -9,6 +9,9 @@ require "date"
 
 puts "Cleaning users"
 User.destroy_all
+Item.destroy_all
+Booking.destroy_all
+
 
 20.times do
   user = User.create!(
