@@ -33,6 +33,7 @@ class BookingsController < ApplicationController
     @booking.user = current_user
     @booking.status = "pending"
     @booking.item = @item
+    @booking.booking_price = @item.price
     authorize @booking
       if @booking.save!
         redirect_to item_path(@item), notice: "Booking was successfully created."
