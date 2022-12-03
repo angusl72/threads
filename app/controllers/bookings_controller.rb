@@ -12,7 +12,7 @@ class BookingsController < ApplicationController
   def update
     authorize @booking
     if @booking.update(booking_params)
-      redirect_to @booking, notice: "Booking was successfully updated."
+      redirect_to bookings_path, notice: "Booking was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
