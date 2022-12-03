@@ -1,21 +1,25 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: %i[show]
+  before_action :set_booking, only: %i[show edit update]
 
   def index
     @bookings = policy_scope(Booking)
-    @bookings = Booking.all
   end
 
   def show
-    authorize @restaurant
+    authorize @booking
   end
 
-  def update_status
-    if @booking.update_status(booking_params)
-      redirect_to @booking, notice: "Booking was successfully updated."
+  def update
+    authorize @booking
+    if @booking.update(booking_params)
+      redirect_to bookings_path, notice: "Booking was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    authorize @booking
   end
 
   def new
