@@ -31,6 +31,8 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
+    @booking.status = "pending"
+    @booking.item = @item
     authorize @booking
       if @booking.save!
         redirect_to item_path(@item), notice: "Booking was successfully created."
