@@ -7,7 +7,7 @@ class BookingsController < ApplicationController
   end
 
   def show
-    authorize @restaurant
+    authorize @booking
   end
 
   def update_status
