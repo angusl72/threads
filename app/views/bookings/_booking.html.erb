@@ -1,10 +1,10 @@
-<div class="container d-flex flex-wrap">
+<div class="d-flex flex-wrap">
   <% @bookings.each do |booking| %>
 
     <div class="card m-2 text-center" style="width: 18rem;">
       <img src="https://www.legacy.com.au/wp-content/uploads/2020/10/tshirt-2.jpg" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title"><%= link_to booking.item.name, booking_path(booking) %></h5>
+        <h5 class="card-title"><%= link_to booking.item.name, edit_booking_path(booking) %></h5>
         <p class="card-text"><strong>Status: </strong><%= booking.status %></p>
         <% days = ((booking.end_date - booking.start_date) / 1.day).to_i %>
         <% total_price = booking.item.price.to_i * days %>
