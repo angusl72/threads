@@ -19,20 +19,21 @@ Booking.destroy_all
 
   item_count = 1
   3.times do
-    image_file = URI.open("https://www.legacy.com.au/wp-content/uploads/2020/10/tshirt-2.jpg")
     puts "creating item: #{item_count}"
     img_id = user.id + item_count
     item_count += 1
+    item_category = %w[tshirt pants top shirt jeans shoes].sample
     item = Item.new(
-      name: Faker::Coffee.variety,
-      category: %w[tshirt pants top shirt jeans shoes].sample,
+      name: "#{['black','red','striped','vintage','new','cottagecore','gorp','minimalist','tailored','womens'].sample} #{item_category}",
+      # name: Faker::Coffee.variety,
+      category: item_category,
       description: Faker::Lorem.paragraph,
       price: [10, 15, 20, 40, 50, 70].sample,
       size: ["XS", "S", "M", "L", "XL", "XXL"].sample,
       user: user
     )
     # item.photo.attach(io: image_file, filename: "#{img_id}.jpg", content_type: "image/jpg")
-    item.photo.attach(io: File.open(Rails.root.join('app/assets/images/tshirt-2.jpeg')), filename: "#{img_id}.jpg" )
+    item.photo.attach(io: File.open(Rails.root.join("app/assets/images/#{[1,2,3,4,5,6,7,8].sample}.jpg")), filename: "#{img_id}.jpg" )
     item.save!
     puts "item attached? #{item.photo.attached?}"
   end
