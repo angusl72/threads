@@ -20,7 +20,7 @@ User.destroy_all
   )
   puts "creating user: #{user.id}"
   5.times do
-    item = Item.create!(
+    item = Item.new(
       name: Faker::Coffee.variety,
       category: %w[tshirt pants top shirt jeans shoes].sample,
       description: Faker::Lorem.paragraph,
@@ -28,7 +28,9 @@ User.destroy_all
       size: ["XS", "S", "M", "L", "XL", "XXL"].sample,
       user: user
     )
-    puts "creating item: #{item.id}"
+    file = URI.open("https://www.legacy.com.au/wp-content/uploads/2020/10/tshirt-2.jpg")
+    item.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
+    item.save
   end
 end
   items = Item.all
