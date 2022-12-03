@@ -2,7 +2,7 @@
   <% @items.each do |item| %>
 
     <div class="card m-2 text-center" style="width: 18rem;">
-      <%= cl_image_tag @item.photo.key, width: 285, height: 290, crop: :fill %>
+      <%= cl_image_tag item.photo.key, width: 285, height: 290, crop: :fill %>
       <div class="card-body">
         <h5 class="card-title"><%= link_to item.name, item_path(item) %></h5>
         <p class="card-text"><%= item.description %></p>

@@ -1,16 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
 require "date"
+require "open-uri" # for our images
 
 puts "Cleaning users"
 User.destroy_all
+Item.destroy_all
+Booking.destroy_all
 
-20.times do
+
+10.times do
   user = User.create!(
     email: Faker::Internet.email,
     password: "123456",
@@ -19,7 +16,13 @@ User.destroy_all
     address: Faker::Address.street_address
   )
   puts "creating user: #{user.id}"
-  5.times do
+
+  item_count = 1
+  3.times do
+    image_file = URI.open("https://www.legacy.com.au/wp-content/uploads/2020/10/tshirt-2.jpg")
+    puts "creating item: #{item_count}"
+    img_id = user.id + item_count
+    item_count += 1
     item = Item.new(
       name: Faker::Coffee.variety,
       category: %w[tshirt pants top shirt jeans shoes].sample,
@@ -28,9 +31,10 @@ User.destroy_all
       size: ["XS", "S", "M", "L", "XL", "XXL"].sample,
       user: user
     )
-    file = URI.open("https://www.legacy.com.au/wp-content/uploads/2020/10/tshirt-2.jpg")
-    item.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
-    item.save
+    # item.photo.attach(io: image_file, filename: "#{img_id}.jpg", content_type: "image/jpg")
+    item.photo.attach(io: File.open(Rails.root.join('app/assets/images/tshirt-2.jpeg')), filename: "#{img_id}.jpg" )
+    item.save!
+    puts "item attached? #{item.photo.attached?}"
   end
 end
   items = Item.all
