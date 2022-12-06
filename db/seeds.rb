@@ -8,6 +8,15 @@ Booking.destroy_all
 ItemReview.destroy_all
 SellerReview.destroy_all
 
+test_user = User.create!(
+  email: "test@test.com",
+  password: "123456",
+  first_name: "Test",
+  last_name: "Account",
+  address: "123 Test Street"
+)
+
+10.times do
 # CREATE USERS & 2 ITEMS FOR EACH USER
 3.times do
   user = User.create!(
@@ -24,9 +33,9 @@ SellerReview.destroy_all
     puts "creating item: #{item_count}"
     img_id = user.id + item_count
     item_count += 1
-    item_category = %w[tshirt pants top shirt jeans shoes].sample
+    item_category = %w[T-Shirt Pants Top Shirt Jeans Shoes].sample
     item = Item.new(
-      name: "#{['black','red','striped','vintage','new','cottagecore','gorp','minimalist','tailored','womens'].sample} #{item_category}",
+      name: "#{['Black','Red','Striped','Vintage','New','Cottagecore','Gorp','Minimalist','Tailored','Womens'].sample} #{item_category}",
       category: item_category,
       description: Faker::Lorem.paragraph,
       price: [10, 15, 20, 40, 50, 70].sample,
@@ -40,32 +49,31 @@ SellerReview.destroy_all
   end
 end
 
-# CREATE 1 BOOKING FOR EACH ITEM & 1 REVIEW
 items = Item.all
 items.each do |item|
   booking = Booking.create(
-    status: %w[pending declined completed in-progress].sample,
+    status: %w[Pending Declined Completed In-progress].sample,
     start_date: Faker::Date.between(from: Date.today, to: 5.days.from_now),
     end_date: Faker::Date.between(from: 10.days.from_now, to: 20.days.from_now),
     booking_price: [10, 15, 20, 40, 50, 70].sample,
     user: User.all.sample,
     item: item
   )
+  
   puts "creating booking: #{booking.id}"
   item_review = ItemReview.create(
     booking: booking,
     rating: rand(1..5),
     feedback: Faker::Restaurant.review
   )
-  puts "creating item review: #{item_review.id}"
 
+  puts "creating item review: #{item_review.id}"
   seller_review = SellerReview.create(
     booking: booking,
     rating: rand(1..5),
     feedback: Faker::Restaurant.review
   )
   puts "creating seller review: #{seller_review.id}"
-
 end
 
 puts "Finished"
