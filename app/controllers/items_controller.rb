@@ -10,7 +10,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-
     @item = Item.new
     authorize @item
   end
@@ -18,7 +17,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
-
     authorize @item
 
     if @item.save

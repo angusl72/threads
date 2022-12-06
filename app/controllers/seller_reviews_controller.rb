@@ -11,12 +11,11 @@ class SellerReviewsController < ApplicationController
     @seller_review = SellerReview.new(seller_review_params)
     @seller_review.booking = @booking
     authorize @seller_review
-
-    if @seller_review.save!
-      redirect_to item_path(@booking.item), status: :see_other
-    else
-      render :new, status: :unprocessable_entity
-    end
+      if @seller_review.save!
+        redirect_to item_path(@booking.item), status: :see_other
+      else
+        render :new, status: :unprocessable_entity
+      end
   end
 
   def edit

@@ -10,8 +10,7 @@ class ItemReviewsController < ApplicationController
     @item_review = ItemReview.new(item_review_params)
     @item_review.booking = @booking
     authorize @item_review
-
-    if @item_review.save
+    if @item_review.save!
       redirect_to booking_path(@booking)
     else
       render :new, status: :unprocessable_entity
@@ -32,6 +31,6 @@ class ItemReviewsController < ApplicationController
   end
 
   def item_review_params
-    params.require(:review).permit(:rating, :feedback)
+    params.require(:item_review).permit(:rating, :feedback, :booking_id, :id)
   end
 end
