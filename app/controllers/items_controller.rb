@@ -2,7 +2,13 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit update destroy]
 
   def index
-    @items = policy_scope(Item)
+
+    if params[:query].present?
+      sql_query = "category ILIKE :query OR name ILIKE :query"
+      @items = policy_scope(Item.where(sql_query, query: "%#{params[:query]}%"))
+    else
+      @items = policy_scope(Item)
+    end
   end
 
   def show
