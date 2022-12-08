@@ -1,17 +1,22 @@
-<div class="container d-flex flex-wrap">
+<div class="cards container d-flex flex-wrap">
   <% @items.each do |item| %>
 
-    <div class="card m-2 text-center" style="width: 18rem;">
+    <div class="card m-2 text-center rounded">
       <% unless item.photo.key == nil %>
-        <%= cl_image_tag item.photo.key, width: 285, height: 290, crop: :fill %>
+        <%= cl_image_tag item.photo.key, width: 285, height: 290, crop: :fill, gravity: "auto", class: "card-img-top"%>
       <% else %>
-        <%= cl_image_tag "j7y67nkdzgsg385degrw5n4os33d", width: 285, height: 290, crop: :fill %>
+        <%= cl_image_tag "j7y67nkdzgsg385degrw5n4os33d", width: 300, height: 300, crop: :fill, gravity: "auto", class: "card-img-top" %>
       <% end %>
       <div class="card-body">
         <h5 class="card-title"><%= link_to item.name, item_path(item) %></h5>
         <p class="card-text"><%= item.description %></p>
-        <p class="card-text"><strong><%= item.category %></strong></p>
-        <%= link_to "$#{item.price}0", item_path(item), :class => "btn btn-primary m-1"%>
+        <p class="card-text item-rating"><%= "⭐"*item.item_reviews.average(:rating).round() %></p>
+        <p class="card-text item-status"><%= item.bookings.last.status %></p>
+        <div class="category-and-price">
+          <p class="card-text"><%= item.category %></p>
+          <%= link_to " ", item_path(item), :class => "stretched-link" %>
+          <p class="card-text"></p><%= "$#{item.price.round()}" %></p>
+        </div>
       </div>
     </div>
 
