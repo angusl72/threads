@@ -1,12 +1,18 @@
 <h2>Items:</h2>
+
+<%= form_with(url: items_path, method: :get, local: true) do |form| %>
+  <%= form.select :order, ["Price High to Low", "Price Low to High", "Relevance"] %>
+  <%= form.submit "Sort" %>
+<% end%>
+
 <%= form_with url: items_path, method: :get, class: "d-flex my-3" do %>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
     placeholder: "Find an item"
     %>
-    <%= submit_tag "Search", class: "btn btn-primary" %>
-  <% end %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
 
 <div><%= link_to "List an item", new_item_path, :class => "btn btn-primary m-1" %></div>
 <div><%= render "item" %></div>
