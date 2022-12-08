@@ -69,6 +69,15 @@ class ItemsController < ApplicationController
     redirect_to items_path, status: :see_other, notice: "Item was successfully destroyed."
   end
 
+  def my_items
+    # skip_authorization
+    # @items = policy_scope(Item)
+    @items = policy_scope(Item).where(user: current_user)
+    # @items = Item.all
+    authorize @items
+
+  end
+
   private
 
   def item_params
@@ -78,5 +87,19 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  def item_booking(item)
+    # raise
+    # Booking.where(id: item.booking_ids).each do |item_booking_id|
+    #   # raise
+    #   item_booking_id.status
+    # end
+    if Booking.where(id: item.booking_ids).empty?
+      "No current bookings"
+    else
+      Booking.where(id: item.booking_ids)
+    end
+  end
+  helper_method :item_booking
 
 end
