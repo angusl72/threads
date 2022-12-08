@@ -2,7 +2,29 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit update destroy]
 
   def index
-    @items = policy_scope(Item)
+
+    if params[:order] && params[:order] == 'Price High to Low'
+      if params[:query].present?
+        sql_query = "category ILIKE :query OR name ILIKE :query"
+        @items = policy_scope(Item.where(sql_query, query: "%#{params[:query]}%").order(:price).reverse_order)
+      else params[:query].present?
+        @items = policy_scope(Item.order(:price).reverse_order)
+      end
+    elsif params[:order] && params[:order] == 'Price Low to High'
+      if params[:query].present?
+        sql_query = "category ILIKE :query OR name ILIKE :query"
+        @items = policy_scope(Item.where(sql_query, query: "%#{params[:query]}%").order(:price))
+      else params[:query].present?
+        @items = policy_scope(Item.order(:price))
+      end
+    else
+      if params[:query].present?
+        sql_query = "category ILIKE :query OR name ILIKE :query"
+        @items = policy_scope(Item.where(sql_query, query: "%#{params[:query]}%"))
+      else params[:query].present?
+        @items = policy_scope(Item)
+      end
+    end
   end
 
   def show
@@ -15,7 +37,6 @@ class ItemsController < ApplicationController
   end
 
   def new
-
     @item = Item.new
     authorize @item
   end
@@ -23,7 +44,6 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     @item.user = current_user
-
     authorize @item
 
     if @item.save

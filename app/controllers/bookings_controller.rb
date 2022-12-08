@@ -24,6 +24,7 @@ class BookingsController < ApplicationController
   end
 
   def new
+
     @booking = Booking.new
     authorize @booking
   end
@@ -31,7 +32,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    @booking.status = "pending"
+    @booking.status = "Pending"
     @booking.item = @item
     @booking.booking_price = @item.price
     authorize @booking
@@ -41,6 +42,7 @@ class BookingsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
   end
+
   private
 
   def set_booking
@@ -54,4 +56,15 @@ class BookingsController < ApplicationController
   def set_item
     @item = Item.find(params[:item_id])
   end
+
+  def total_booking_days(booking)
+    @days = ((booking.end_date - booking.start_date) / 1.day).to_i
+  end
+  helper_method :total_booking_days
+
+  def total_price(booking)
+    @total_price = booking.item.price.to_i * total_booking_days(booking)
+  end
+  helper_method :total_price
+
 end
