@@ -1,0 +1,14 @@
+<div class="container-fluid py-2">
+  <div class="d-flex flex-row flex-nowrap overflow-auto">
+    <% reviews.each do |review| %>
+      <div class="card card-block mx-2" style="min-height: 200px;
+        min-width: 300px;
+        margin-right: 5px;">
+        <div class="card-body">
+          <h5 class="card-title"><%= "⭐"*review.rating %></h5>
+          <p class="card-text"><%= review.feedback.truncate(100) %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
