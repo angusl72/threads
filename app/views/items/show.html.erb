@@ -6,7 +6,16 @@
 <p><strong>Description:  </strong><%= @item.description %></p>
 <p><strong>Price:  </strong>$<%= @item.price %></p>
 <p><strong>Size:  </strong><%= @item.size %></p>
+<p><strong>Item Rating:  </strong><%= "#{'⭐'*@average_item_rating} - #{@item_reviews.count} Reviews" %></p>
+<p><strong>Seller Rating:  </strong><%= "#{'⭐'*@average_seller_rating} - #{@seller_reviews.count} Reviews"%></p>
 
+<hr>
+
+<h2>ITEM REVIEWS</h2>
+<%= render partial: "reviews", locals: { reviews: @item_reviews } %>
+<hr>
+<h2>SELLER REVIEWS</h2>
+<%= render partial: "reviews", locals: { reviews: @seller_reviews } %>
 <hr>
 
 <%= link_to "go back", items_path, :class => "btn btn-primary m-1" %>

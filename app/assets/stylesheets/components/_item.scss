@@ -1,0 +1,48 @@
+.cards {
+  .card {
+    .item-rating {
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      width: auto;
+      padding: 5px;
+      height: auto;
+      background-color: rgba(0,0,0,0.3);
+      border-radius: 6px;
+    }
+
+    .item-status {
+      position: absolute;
+      left: 3px;
+      top: 4px;
+      width: auto;
+      padding: 5px;
+      height: auto;
+      background-color: rgba(4, 220, 0, 0.3);
+      border-radius: 6px;
+  }
+    .card-title a {
+      text-decoration: none;
+      font-weight: 700;
+      color: black;
+    }
+    .card-title a:hover {
+      color: rgb(182, 0, 0);
+    }
+
+    .category-and-price {
+      font-weight: 700;
+      color: black;
+      display: flex;
+      justify-content: center;
+
+      .card-text {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+    }
+    color: rgb(83, 83, 83);
+    width: 18rem;
+  }
+
+}
