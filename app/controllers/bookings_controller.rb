@@ -32,7 +32,7 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    @booking.status = "pending"
+    @booking.status = "Pending"
     @booking.item = @item
     @booking.booking_price = @item.price
     authorize @booking
