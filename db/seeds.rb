@@ -59,7 +59,7 @@ items.each do |item|
     user: User.all.sample,
     item: item
   )
-  
+
   puts "creating booking: #{booking.id}"
   20.times do
     item_review = ItemReview.create(
@@ -81,3 +81,4 @@ items.each do |item|
 end
 
 puts "Finished"
+end
