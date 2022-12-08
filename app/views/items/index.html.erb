@@ -1,11 +1,14 @@
 <h2>Items:</h2>
 
 <%= form_with(url: items_path, method: :get, local: true) do |form| %>
+  <%= hidden_field_tag :query, params[:query]%>
+  <%= hidden_field_tag :order, params[:order]%>
   <%= form.select :order, ["Price High to Low", "Price Low to High", "Relevance"] %>
   <%= form.submit "Sort" %>
 <% end%>
 
 <%= form_with url: items_path, method: :get, class: "d-flex my-3" do %>
+  <%= hidden_field_tag :order, params[:order]%>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
