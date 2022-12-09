@@ -42,7 +42,7 @@ class ItemsController < ApplicationController
     authorize @item
 
     if @item.save
-      redirect_to @item, notice: 'Item was successfully created'
+      redirect_to @item
     else
       render :new, status: :unprocessable_entity
     end
@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
     authorize @item
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: "Item was successfully updated."
+      redirect_to item_path(@item)
     else
       render :edit, status: :unprocessable_entity
     end
@@ -66,7 +66,7 @@ class ItemsController < ApplicationController
     authorize @item
     @item = Item.find(params[:id])
     @item.destroy
-    redirect_to items_path, status: :see_other, notice: "Item was successfully destroyed."
+    redirect_to items_path, status: :see_other
   end
 
   private
