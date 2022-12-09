@@ -13,7 +13,7 @@ class BookingsController < ApplicationController
   def update
     authorize @booking
     if @booking.update(booking_params)
-      redirect_to bookings_path, notice: "Booking was successfully updated."
+      redirect_to bookings_path
     else
       render :edit, status: :unprocessable_entity
     end
@@ -24,7 +24,6 @@ class BookingsController < ApplicationController
   end
 
   def new
-
     @booking = Booking.new
     authorize @booking
   end
@@ -37,7 +36,7 @@ class BookingsController < ApplicationController
     @booking.booking_price = @item.price
     authorize @booking
       if @booking.save!
-        redirect_to item_path(@item), notice: "Booking was successfully created."
+        redirect_to item_path(@item)
       else
         render :new, status: :unprocessable_entity
       end
