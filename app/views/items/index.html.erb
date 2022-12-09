@@ -2,8 +2,7 @@
 
 <%= form_with(url: items_path, method: :get, local: true) do |form| %>
   <%= hidden_field_tag :query, params[:query]%>
-  <%= hidden_field_tag :order, params[:order]%>
-  <%= form.select :order, ["Price High to Low", "Price Low to High", "Relevance"] %>
+  <%= form.select :order, ["Price High to Low", "Price Low to High", "Relevance"], :selected => params[:order] %>
   <%= form.submit "Sort" %>
 <% end%>
 

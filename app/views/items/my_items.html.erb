@@ -1,0 +1,31 @@
+<h2>My Items</h2>
+
+
+<div class="d-flex flex-wrap">
+
+  <% @items.each do |item| %>
+
+    <% @item_bookings = item_booking(item) %>
+
+    <div class="card m-2 text-center" style="width: 18rem;">
+      <% unless item.photo.key == nil %>
+        <%= cl_image_tag item.photo.key, width: 285, height: 290, crop: :fill %>
+      <% else %>
+        <%= cl_image_tag "j7y67nkdzgsg385degrw5n4os33d", width: 285, height: 290, crop: :fill %>
+      <% end %>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to item.name, item_path(item) %></h5>
+        <p class="card-text"><strong>Category: </strong><%= item.category %></p>
+        <% if @item_bookings == "No current bookings" %>
+          <p class="card-text"><strong>Current Bookings: </strong>No current bookings</p>
+        <% else %>
+          <p class="card-text"><strong>Current Bookings:</strong></p>
+          <% @item_bookings.each do |item_booking| %>
+            <p class="card-text"><%= link_to "#{item_booking.start_date.strftime("%d/%m/%Y")} - #{item_booking.status}" , edit_booking_path(item_booking) %></p>
+          <% end %>
+        <% end %>
+        <%= link_to "$#{item.price}0", item_path(item), :class => "btn btn-primary m-1"%>
+      </div>
+    </div>
+  <% end %>
+</div>

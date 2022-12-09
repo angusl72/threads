@@ -59,15 +59,19 @@ items.each do |item|
     user: User.all.sample,
     item: item
   )
-  
+
   puts "creating booking: #{booking.id}"
-  item_review = ItemReview.create(
+  20.times do
+    item_review = ItemReview.create(
     booking: booking,
     rating: rand(1..5),
     feedback: Faker::Restaurant.review
-  )
 
-  puts "creating item review: #{item_review.id}"
+    )
+    puts "creating item review: #{item_review.id}"
+  end
+
+
   seller_review = SellerReview.create(
     booking: booking,
     rating: rand(1..5),
@@ -77,3 +81,4 @@ items.each do |item|
 end
 
 puts "Finished"
+end
