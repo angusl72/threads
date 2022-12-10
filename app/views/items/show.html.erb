@@ -7,6 +7,9 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
+          <% unless @booking.blank? %>
+              <p class="booking-days-remaining"><%= "#{pluralize (@booking.start_date.to_date - Time.now.to_date).to_i, "Day"} Until Your Booking!" %></p>
+            <% end %>
           <% if @average_item_rating %>
             <h2 class="card-title"><%= "#{@item.name} - #{'⭐'*@average_item_rating}" %></h2>
           <% else %>

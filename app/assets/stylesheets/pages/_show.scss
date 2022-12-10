@@ -1,0 +1,16 @@
+/* Style the button and place it in the middle of the container/image */
+.booking-days-remaining {
+  position: absolute;
+    top: 40px;
+    right: -73px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #1edd88a1;
+    color: #0e0000;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 7px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
