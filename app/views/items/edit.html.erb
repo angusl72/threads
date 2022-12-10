@@ -1,9 +1,4 @@
 <h1>Editing Item</h1>
 
 <%= render "form", item: @item %>
-
-<br>
-
-<div>
- <%= link_to "Back to Items", items_path  %>
-</div>
+<%= link_to "Back to Items", items_path, :class => "btn btn-flat" %>

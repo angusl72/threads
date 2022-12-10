@@ -19,7 +19,11 @@
         <% end %>
 
         <% if item.bookings.count >= 1 %>
-          <p class="card-text item-status"><%= item.bookings.last.status %></p>
+           <% if item.bookings.last.status == "Completed" %>
+            <p class="card-text item-status">Available</p>
+            <% else %>
+              <p class="card-text item-status"><%= item.bookings.last.status %></p>
+            <% end %>
         <% end %>
 
         <div class="category-and-price">
