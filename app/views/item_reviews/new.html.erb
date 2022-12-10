@@ -2,7 +2,7 @@
  <h1>New review</h1>
   <%= simple_form_for [@booking, @item_review] do |f| %>
     <%= f.input :feedback %>
-    <%= f.input :rating, :collection => %w[⭐️ ⭐️⭐️ ⭐️⭐️⭐️ ⭐️⭐️⭐️⭐️ ⭐️⭐️⭐️⭐️⭐️], :input_html => {:class => 'selectpicker'}, prompt: "Rating" %>
+    <%= f.input :rating, :collection => [["⭐️", 1], ["⭐️⭐️", 2], ["⭐️⭐️⭐️", 3], ["⭐️⭐️⭐️⭐️", 4], ["⭐️⭐️⭐️⭐️⭐️", 5]], :input_html => {:class => 'selectpicker'}, prompt: "Rating" %>
     <%= f.submit "Submit review", class: "btn btn-primary" %>
   <% end %>
 </div>
