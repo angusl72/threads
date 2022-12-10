@@ -30,8 +30,11 @@
 <p><strong>Description:  </strong><%= @item.description %></p>
 <p><strong>Price:  </strong>$<%= @item.price %></p>
 <p><strong>Size:  </strong><%= @item.size %></p>
-<p><strong>Item Rating:  </strong><%= "#{'⭐'*@average_item_rating} - #{@item_reviews.count} Reviews" %></p>
-<p><strong>Seller Rating:  </strong><%= "#{'⭐'*@average_seller_rating} - #{@seller_reviews.count} Reviews"%></p>
+
+<% unless @item.item_reviews.empty? %>
+  <p><strong>Item Rating:  </strong><%= "#{'⭐'*@average_item_rating} - #{@item_reviews.count} Reviews" %></p>
+  <p><strong>Seller Rating:  </strong><%= "#{'⭐'*@average_seller_rating} - #{@seller_reviews.count} Reviews"%></p>
+<% end %>
 
 <hr>
 
