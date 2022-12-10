@@ -32,8 +32,12 @@ class ItemsController < ApplicationController
     @item_reviews = @item.item_reviews
     @seller_reviews = @item.seller_reviews
 
-    @average_item_rating = @item_reviews.average(:rating).round()
-    @average_seller_rating = @seller_reviews.average(:rating).round()
+
+    unless @item.item_reviews.empty?
+      @average_item_rating = @item_reviews.average(:rating).round()
+      @average_seller_rating = @seller_reviews.average(:rating).round()
+    end
+
   end
 
   def new
