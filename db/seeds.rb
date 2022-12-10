@@ -43,7 +43,7 @@ test_user = User.create!(
     )
     # Update this to select a random phto from internet
     puts item_category
-    item.photo.attach(io: File.open(Rails.root.join("app/assets/images/#{item_category}/#{rand(1..7)}.jpg")), filename: "#{img_id}.jpg")
+    item.photo.attach(io: File.open(Rails.root.join("app/assets/images/#{item_category.downcase}/#{rand(1..7)}.jpg")), filename: "#{img_id}.jpg")
     item.save!
     puts "item attached? #{item.photo.attached?}"
   end
