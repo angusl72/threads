@@ -7,7 +7,11 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h2 class="card-title"><%= "#{@item.name} - #{'⭐'*@average_item_rating}" %></h5>
+          <% if @average_item_rating %>
+            <h2 class="card-title"><%= "#{@item.name} - #{'⭐'*@average_item_rating}" %></h2>
+          <% else %>
+            <h2 class="card-title"><%= @item.name %></h2>
+          <% end %>
           <br>
           <h5 class="card-title"><strong><%= "$#{@item.price.round} / Day" %></strong></h5>
           <br>
@@ -33,9 +37,9 @@
 
 <hr>
 
-<h2>ITEM REVIEWS (<%= @item_reviews.count %>)</h2>
+<h2>ITEM REVIEWS<%= "(#{@item_reviews.count})" unless @item_reviews.blank? %></h2>
 <%= render partial: "reviews", locals: { reviews: @item_reviews } %>
 <hr>
-<h2>SELLER REVIEWS (<%= @seller_reviews.count %>)</h2>
+<h2>SELLER REVIEWS<%= "(#{@seller_reviews.count})" unless @seller_reviews.blank? %></h2>
 <%= render partial: "reviews", locals: { reviews: @seller_reviews } %>
 <hr>
