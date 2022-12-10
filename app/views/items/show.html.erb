@@ -37,9 +37,17 @@
 
 <hr>
 
-<h2>ITEM REVIEWS<%= "(#{@item_reviews.count})" unless @item_reviews.blank? %></h2>
-<%= render partial: "reviews", locals: { reviews: @item_reviews } %>
+<h2>ITEM REVIEWS<%= " (#{@item_reviews.count})" unless @item_reviews.blank? %></h2>
+<% if @item_reviews.blank? %>
+  <p>Be the first to leave a review!</p>
+<% else %>
+  <%= render partial: "reviews", locals: { reviews: @item_reviews } %>
+<% end %>
 <hr>
-<h2>SELLER REVIEWS<%= "(#{@seller_reviews.count})" unless @seller_reviews.blank? %></h2>
-<%= render partial: "reviews", locals: { reviews: @seller_reviews } %>
+<h2>SELLER REVIEWS<%= " (#{@seller_reviews.count})" unless @seller_reviews.blank? %></h2>
+<% if @seller_reviews.blank? %>
+  <p>Be the first to leave a review!</p>
+<% else %>
+  <%= render partial: "reviews", locals: { reviews: @seller_reviews } %>
+<% end %>
 <hr>
